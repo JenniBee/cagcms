@@ -207,7 +207,7 @@ elseif($_POST{'savemenu'} == $admin_ans[13]) {
 			$inserted = false;
 		}
 		if($inserted) {
-			$cgadmin .= "<div class=\"dbmessage\">The category $catname was removed successfully.</div>";
+			$cgadmin .= "<div class=\"dbmessage\">The item was edited successfully.</div>";
 		}
 	}
 }
@@ -230,7 +230,7 @@ elseif($_POST{'savemenu'} == $admin_addmenutxt[10]) {
 			$inserted = false;
 		}
 		if($inserted) {
-			$cgadmin .= "<div class=\"dbmessage\">The category $catname was removed successfully.</div>";
+			$cgadmin .= "<div class=\"dbmessage\">The item was edited successfully.</div>";
 		}
 	}
 }
