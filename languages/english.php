@@ -15,6 +15,7 @@
 
 $template_lng = array(
 "newstitle"=>"Site News",
+"archivetitle"=>"News Archive",
 "sitenav"=>"Site Navigation",
 "contactus"=>"Contact Us",
 "searchtitle"=>"Search",

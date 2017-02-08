@@ -185,20 +185,20 @@ require_once("$sourcepath/menus.php");
 
 # If the user has specified that they will be using CACMS to generate their news, we need to parse the news differently than the rest of our content #
 
-if($id == 'news' && $newsok == 1) {
+if($id == 'news' || $id == 'newsarchive' && $newsok == 1) {	
 
 	$cgnews = "";
-	
+
 	$sql_query = "SELECT * FROM `news` WHERE `newstime` >= '";
 	$sql_query .= time()-($newsoff*24*60*60);
 	$sql_query .= "' ORDER BY `newstime` DESC";
-	if(mysql_num_rows(mysql_query($sql_query, $link)) < $newscap) {
+	if($id == 'news' && mysql_num_rows(mysql_query($sql_query, $link)) < $newscap || $id == 'newsarchive') {
 		$sql_query = "SELECT * FROM `news` ORDER BY `newstime` DESC";
 	}
 	$sql_query = mysql_query($sql_query, $link);
 	$newscnt = 0;
 	while($rs = mysql_fetch_array($sql_query)) {
-		if($newscnt < $newscap) {
+		if($id == 'news' && $newscnt < $newscap || $id == 'newsarchive') {
 			if(!empty($rs['username'])) {
 				if($yabbok) {
 					$uservars = getyabbuservars($memberdir."/".$rs['username'].".vars");
@@ -229,20 +229,21 @@ if($id == 'news' && $newsok == 1) {
 		}
 	}
 	
-	$cgmain = $cgnews;
-	$cgpagetitle = $template_lng[newstitle];
-	$cgtitle = $cgpagetitle.' | '.$sitename;
+	if($id == 'news')
+	{
+		$cgmain = $cgnews;
+		$cgpagetitle = $template_lng[newstitle];
+		$cgtitle = $cgpagetitle.' | '.$sitename;
+	}
+
+	if($id == 'newsarchive')
+	{
+		$cgmain = $cgnews;
+		$cgpagetitle = $template_lng[archivetitle];
+		$cgtitle = $cgpagetitle.' | '.$sitename;
+	}
+
 }	
-
-# The following code has been added specifically for Ten-321 Enterprises, and should be removed in the release package #
-
-elseif($_GET{'action'} == 'search') {
-	$cgpagetitle = "$template_lng[searchtitle]";
-	$cgtitle = $cgpagetitle.' | '.$sitename;
-	require_once("$sourcepath/search.php");
-}
-
-# Back to the normal, default release of CACMS #
 
 # If the page is not to be built from CACMS News, then we need to build it properly. #
 
@@ -363,7 +364,7 @@ include_once("$sourcepath/polls.php");
 $template_vars[cgpollblock]=$cgpollblock;
 include_once("$sourcepath/breadcrumb.php");
 $template_vars[cgbreadcrumb]=$cgbreadcrumb;
-$cgclose = "This site is powered by <a href=\"http://sourceforge.net/projects/cagcms/\">CAGCMS</a>.<br />&copy;2007-2017 <a href=\"http://ten-321.com/\">Ten-321 Enterprises</a>.";
+$cgclose = "This site is powered by <a href=\"https://github.com/JenniBee/cagcms/\">CAGCMS</a>.<br />&copy;2007-2017 <a href=\"http://ten-321.com/\">Ten-321 Enterprises</a>.";
 $template_vars[cgclose]=$cgclose;
 
 # We are done including our extra source files for CAGCMS Add-Ons #
