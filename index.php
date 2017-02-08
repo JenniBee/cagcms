@@ -221,7 +221,19 @@ if($id == 'news' || $id == 'newsarchive' && $newsok == 1) {
 			$mytempvars = array('cgnewssubject'=>$rs['newssubject']);
 			$mytempvars['cgnewsdate'] = date("F d, Y",$rs['newstime']);
 			$mytempvars['cgnewsposter'] = $poster->displayname;
-			$mytempvars['cgnewscontent'] = $rs['newscontent'];
+			if($newscnt != $newscap && $id == 'news')
+			{
+				$mytempvars['cgnewscontent'] = 
+$rs['newscontent'];
+			}
+			if($newscnt == $newscap - 1 && $id == 'news')
+			{
+				$mytempvars['cgnewscontent'] = $rs['newscontent'] . "<p><a href='index.php?id=newsarchive'>$template_lng[archivetitle]</a>";
+			}
+			if($id == 'newsarchive')
+			{
+				$mytempvars['cgnewscontent'] = $rs['newscontent'];
+			}
 			$template_vars = $mytempvars;
 			$mytemplate = new template('newstemplate', $template_vars);
 			$cgnews .= $mytemplate->buildtemplate($templatepath,$imgdir);
