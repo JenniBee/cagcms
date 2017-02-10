@@ -78,11 +78,11 @@ if(!empty($user->userlevel['news'])) {
 			<form name="newsedit" id="newsedit" action="'.$cagcmsadmin.'?action=news" method="post">';
 		if($user->checkperms('news', MODIFY, ALL) || $user->checkperms('news', REMOVE, ALL)) {
 			# If the user has permission to modify or remove all news items, we need to retrieve a list of all of the news items that have been posted
-			$sql_getnews = "SELECT newstime, username, newsposter, newssubject FROM news ORDER BY newstime";
+			$sql_getnews = "SELECT newstime, username, newsposter, newssubject FROM news ORDER BY newstime DESC";
 		}
 		elseif($user->checkperms('news',MODIFY,OWN) || $user->checkperms('news',REMOVE,OWN)) {
 			# If the user has permission to modify or remove their own items, we need to retrieve a list of those news items
-			$sql_getnews = "SELECT newstime, username, newsposter, newssubject FROM news WHERE username='".$user->username."' ORDER BY newstime";
+			$sql_getnews = "SELECT newstime, username, newsposter, newssubject FROM news WHERE username='".$user->username."' ORDER BY newstime DESC";
 		}
 		if(!empty($sql_getnews)) {
 			$cgadmin .= '
