@@ -20,15 +20,19 @@
 	$contactok = "1";
 	$searchok = "1";
 	$searchcode = "<div class='searchblock'>
-<!-- Atomz HTML for Search -->
-<form method='get' action='http://search.atomz.com/search/'>
-<input type='hidden' name='sp_a' value='sp100318cc' />
-<input type='text' size='15' name='sp_q' id='sp_q' />
-<input type='image' src='http://siteurl.com/cagcms/images/gobutton.png' alt='Go' name='submitsearch' id='submitsearch' value='Search' />
-<input type='hidden' name='sp_p' value='all' />
-<input type='hidden' name='sp_f' value='ISO-8859-1' />
-</form>
-</div>";
+<!-- Google Custom Search -->
+<script>
+  (function() {
+    var cx = 'Search Engine ID';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>";
 	$loginok = "1";
 	$yabbok = "";
 	$yabbpath = "";
